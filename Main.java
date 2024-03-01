@@ -1,3 +1,5 @@
+package Team4;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,12 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-package com.example.team4;
+
 public class Main extends JFrame {
 
-    private Timer timer1;
-    private Timer timer2;
-    private Timer timer3;
+    private Timer timer1; // Timer for the first task
+    private Timer timer2; // Timer for the second task
+    private Timer timer3; // Timer for the third task
 
     private JLabel label1;
     private JLabel label2;
@@ -87,12 +89,12 @@ public class Main extends JFrame {
     private void startTimer1() {
         try {
             if (timer1 != null) {
-                timer1.cancel();
+                timer1.cancel(); // Cancels the previous timer if exists
             }
 
             int seconds = Integer.parseInt(textField1.getText());
-            timer1 = new Timer();
-            timer1.scheduleAtFixedRate(new TimerTask() {
+            timer1 = new Timer(); // Creates a new Timer
+            timer1.scheduleAtFixedRate(new TimerTask() { // Schedules a task to be run at fixed intervals
                 int secondsElapsed = 1;
 
                 @Override
@@ -100,11 +102,11 @@ public class Main extends JFrame {
                     if (secondsElapsed < seconds) {
                         label1.setText("Secunde trecute: " + secondsElapsed++);
                     } else {
-                        timer1.cancel();
+                        timer1.cancel(); // Cancels the timer when time is up
                         label1.setText("Timpul a expirat!");
                     }
                 }
-            }, 0, 1000);
+            }, 0, 1000); // Initial delay 0, repeat every 1000 milliseconds (1 second)
         } catch (NumberFormatException e) {
             showErrorDialog("Introduceți un număr valid pentru timp.");
         }
@@ -113,12 +115,12 @@ public class Main extends JFrame {
     private void startTimer2() {
         try {
             if (timer2 != null) {
-                timer2.cancel();
+                timer2.cancel(); // Cancels the previous timer if exists
             }
 
             int totalTime = Integer.parseInt(textField2.getText());
-            timer2 = new Timer();
-            timer2.scheduleAtFixedRate(new TimerTask() {
+            timer2 = new Timer(); // Creates a new Timer
+            timer2.scheduleAtFixedRate(new TimerTask() { // Schedules a task to be run at fixed intervals
                 int elapsedTime = 1;
 
                 @Override
@@ -131,7 +133,7 @@ public class Main extends JFrame {
                         elapsedTime = 1; // Resetează numărătoarea
                     }
                 }
-            }, 0, 1000); // Rulează task-ul la fiecare secundă
+            }, 0, 1000); // Initial delay 0, repeat every 1000 milliseconds (1 second)
         } catch (NumberFormatException e) {
             showErrorDialog("Introduceți un număr valid pentru timp.");
         }
@@ -140,11 +142,11 @@ public class Main extends JFrame {
     private void startTimer3() {
         try {
             if (timer3 != null) {
-                timer3.cancel();
+                timer3.cancel(); // Cancels the previous timer if exists
             }
 
-            timer3 = new Timer();
-            timer3.scheduleAtFixedRate(new TimerTask() {
+            timer3 = new Timer(); // Creates a new Timer
+            timer3.scheduleAtFixedRate(new TimerTask() { // Schedules a task to be run at fixed intervals
                 @Override
                 public void run() {
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -153,10 +155,10 @@ public class Main extends JFrame {
 
                     if (currentTime.equals(textField3.getText())) {
                         label3.setText("Timpul a expirat la ora " + currentTime);
-                        timer3.cancel();
+                        timer3.cancel(); // Cancels the timer when specified time is reached
                     }
                 }
-            }, 0, 1000);
+            }, 0, 1000); // Initial delay 0, repeat every 1000 milliseconds (1 second)
         } catch (Exception e) {
             showErrorDialog("Introduceți o oră validă (HH:mm:ss).");
         }
@@ -164,7 +166,7 @@ public class Main extends JFrame {
 
     private void stopTimer2() {
         if (timer2 != null) {
-            timer2.cancel();
+            timer2.cancel(); // Cancels the second timer
         }
     }
 
